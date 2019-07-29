@@ -28,5 +28,6 @@ exports.down = function(knex, Promise) {
 	return knex.schema
 		.dropTableIfExists('recipes')
 		.dropTableIfExists('ingredients')
-		.dropTableIfExists('quantities');
+		.dropTableIfExists('quantities')
+		.dropTableIfExists('units');
 };
