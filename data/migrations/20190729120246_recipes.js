@@ -13,6 +13,10 @@ exports.up = function(knex) {
 		.createTable('quantities', table => {
 			table.increments();
 			table.float('amount').notNullable();
+		})
+		.createTable('units', table => {
+			table.increments();
+			table.text('unit', 128).notNullable();
 		});
 };
 
