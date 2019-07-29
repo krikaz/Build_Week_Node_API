@@ -2,6 +2,10 @@ exports.up = function(knex) {
 	return knex.schema
 		.createTable('recipes', table => {
 			table.increments();
+			table
+				.integer('user_id')
+				.references('id')
+				.inTable('users');
 			table.text('title', 128).notNullable();
 			table.text('category', 128).notNullable();
 			table.text('source', 128);
