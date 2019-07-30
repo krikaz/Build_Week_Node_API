@@ -8,6 +8,7 @@ module.exports = {
 	findByUserId,
 	edit,
 	remove,
+	search,
 };
 
 function find() {
@@ -44,5 +45,10 @@ async function remove(id) {
 	const result = await db('recipes')
 		.where({ id })
 		.del();
+	return result;
+}
+
+async function search(word) {
+	const result = await db('recipes').where('title', 'like', `%${word}%`);
 	return result;
 }

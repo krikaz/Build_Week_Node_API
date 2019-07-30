@@ -45,6 +45,12 @@ router.delete('/recipes/:id', restricted, checkRecipe, (req, res) => {
 		.catch(err => res.status(500).send(err));
 });
 
-
+router.post('/recipes/search/:term', restricted, checkRecipe, (req, res) => {
+	Recipes.search(req.params.term)
+		.then(result => {
+			res.status(200).json(result);
+		})
+		.catch(err => res.status(500).send(err));
+});
 
 module.exports = router;
