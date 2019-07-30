@@ -29,12 +29,6 @@ router.post('/recipes', restricted, checkRecipe, (req, res) => {
 		.catch(err => res.status(500).send(err));
 });
 
-// router.post('/instructions', restricted, checkRecipe, (req, res) => {
-// 	add('instructions', req.body)
-// 		.then(result => {
-// 			res.status(200).json(result);
-// 		})
-// 		.catch(err => res.status(500).send(err));
-// });
+
 
 module.exports = router;
