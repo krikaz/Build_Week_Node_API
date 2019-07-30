@@ -6,7 +6,7 @@ const authRouter = require('../auth/auth-router');
 const usersRouter = require('../users/users-router');
 // const recipesRouter = require('../recipes/recipes-router');
 const restricted = require('../auth/restricted-middleware');
-const checkRecipe = require('../recipes/checkRecipe-middleware');
+const checkReqBody = require('../recipes/checkReqBody-middleware');
 const db = require('../data/dbConfig');
 
 const server = express();
@@ -34,7 +34,7 @@ function findById(dbName, id) {
 		.first();
 }
 
-server.post('/api/quantities', restricted, checkRecipe, (req, res) => {
+server.post('/api/quantities', restricted, checkReqBody, (req, res) => {
 	add('quantities', req.body)
 		.then(result => {
 			res.status(200).json(result);
@@ -42,7 +42,7 @@ server.post('/api/quantities', restricted, checkRecipe, (req, res) => {
 		.catch(err => res.status(500).send(err));
 });
 
-server.post('/api/units', restricted, checkRecipe, (req, res) => {
+server.post('/api/units', restricted, checkReqBody, (req, res) => {
 	add('units', req.body)
 		.then(result => {
 			res.status(200).json(result);
@@ -50,7 +50,7 @@ server.post('/api/units', restricted, checkRecipe, (req, res) => {
 		.catch(err => res.status(500).send(err));
 });
 
-server.post('/api/ingredients', restricted, checkRecipe, (req, res) => {
+server.post('/api/ingredients', restricted, checkReqBody, (req, res) => {
 	add('ingredients', req.body)
 		.then(result => {
 			res.status(200).json(result);
@@ -58,7 +58,7 @@ server.post('/api/ingredients', restricted, checkRecipe, (req, res) => {
 		.catch(err => res.status(500).send(err));
 });
 
-server.post('/api/instructions', restricted, checkRecipe, (req, res) => {
+server.post('/api/instructions', restricted, checkReqBody, (req, res) => {
 	add('instructions', req.body)
 		.then(result => {
 			res.status(200).json(result);
