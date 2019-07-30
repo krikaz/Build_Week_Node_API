@@ -2,7 +2,6 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// const secret = require('../config/secrets');
 const Users = require('../users/users-model.js');
 
 router.post('/register', (req, res) => {
@@ -45,7 +44,6 @@ function generateToken(user) {
 	const payload = {
 		subject: user.id,
 		username: user.username,
-		// roles: ['Student'],
 	};
 
 	const options = {

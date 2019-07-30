@@ -28,7 +28,5 @@ function findById(id) {
 }
 
 function findByUserId(id) {
-	return db('recipes')
-		.where({ user_id: id })
-		// .first();
+	return db('recipes').where({ user_id: id });
 }
