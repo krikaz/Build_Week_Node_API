@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Users = require('./users-model.js');
 const Recipes = require('../recipes/recipes-model');
 const restricted = require('../auth/restricted-middleware');
+const checkUserId = require('../auth/checkUserId-middleware');
 
 router.get('/', restricted, (req, res) => {
 	Users.find()
@@ -12,7 +13,7 @@ router.get('/', restricted, (req, res) => {
 		.catch(err => res.status(500).send(err));
 });
 
-router.get('/:id/recipes', (req, res) => {
+router.get('/:id/recipes', restricted, checkUserId(2), (req, res) => {
 	const { id } = req.params;
 	Recipes.findByUserId(id)
 		.then(recipes => {
