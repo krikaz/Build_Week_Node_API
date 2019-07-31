@@ -4,7 +4,6 @@ const cors = require('cors');
 
 const authRouter = require('../auth/auth-router');
 const usersRouter = require('../users/users-router');
-// const recipesRouter = require('../recipes/recipes-router');
 const restricted = require('../auth/restricted-middleware');
 const checkReqBody = require('../recipes/checkReqBody-middleware');
 const db = require('../data/dbConfig');
@@ -17,7 +16,6 @@ server.use(cors());
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', usersRouter);
-// server.use('/api/recipes', recipesRouter);
 
 server.get('/', (req, res) => {
 	res.send("It's working!");
