@@ -3,48 +3,49 @@ const Users = require('./users-model');
 
 beforeEach(async () => {
 	await db('users').truncate();
-	await db('recipes').truncate();
+	// await db('recipes').truncate();
 });
 
-afterEach(async () => {
-	await db('users').truncate();
-	await db('recipes').truncate();
-});
+// afterEach(async () => {
+// 	await db('users').truncate();
+// 	await db('recipes').truncate();
+// });
 
 function addUser(name, pass) {
-	return Users.add({ username: name, password: pass });
-}
-
-function addTestUsers() {
-	addUser('whiskeyjack', '12345');
-	addUser('crokus', '12345');
-	addUser('swedgen', '12345');
+	Users.add({ username: name, password: pass });
 }
 
 describe('users.insert', () => {
 	it('is able to add user to the db!', async () => {
 		let users = await Users.find();
-		expect(users).toHaveLength(0);
+		// expect(users).toHaveLength(0);
+		const usersLength = users.length;
 
-		addTestUsers();
+		await addUser('whiskeyjack', '12345');
+		await addUser('crokus', '12345');
+		await addUser('swedgen', '12345');
+
 		users = await Users.find();
-		expect(users).toHaveLength(3);
+		expect(users).toHaveLength(usersLength + 3);
 	});
 
 	it('is able to insert the correct users', async () => {
 		let users = await Users.find();
-		expect(users).toHaveLength(0);
+		// expect(users).toHaveLength(0);
+		const usersLength = users.length;
 
-		addTestUsers();
+		await addUser('john', '12345');
+		await addUser('joe', '12345');
+		await addUser('josh', '12345');
+
 		users = await Users.find();
-
-		expect(users[0].username).toBe('whiskeyjack');
-		expect(users[1].username).toBe('crokus');
-		expect(users[2].username).toBe('swedgen');
+		expect(users[usersLength].username).toBe('john');
+		expect(users[usersLength + 1].username).toBe('joe');
+		expect(users[usersLength + 2].username).toBe('josh');
 	});
 
 	it('returns the newly inserted user', async () => {
-		const newUser = await addUser('whiskeyjack', '12345');
-		expect(newUser.username).toBe('whiskeyjack');
+		const newUser = await addUser('rake', '12345');
+		expect(newUser.username).toBe('rake');
 	});
 });
