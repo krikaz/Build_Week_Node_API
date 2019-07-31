@@ -1,7 +1,10 @@
 # Build_Week_Node_API
 
+server url https://secret-family-recipes-lambda.herokuapp.com/
+
 | Request  | Endpoint                        | Description                                                                                     |
 | -------- | ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `get`    | /                               | check that the server is responding                                                             |
 | `post`   | /api/quantities                 | create new quantity. `amount` required                                                          |
 | `post`   | /api/units                      | create new unit. `unit` required                                                                |
 | `post`   | /api/ingredients                | create new ingredient. `name` required                                                          |
