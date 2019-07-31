@@ -6,13 +6,13 @@ beforeEach(async () => {
 });
 
 function addUser(name, pass) {
-	return Users.insert({ username: name, password: pass });
+	return Users.add({ username: name, password: pass });
 }
 
-function addTestUsers () {
-  await addUser('whiskeyjack', '12345');
-  await addUser('crokus', '12345');
-  await addUser('swedgen', '12345');
+function addTestUsers() {
+	addUser('whiskeyjack', '12345');
+	addUser('crokus', '12345');
+	addUser('swedgen', '12345');
 }
 
 describe('users.insert', () => {
@@ -20,7 +20,7 @@ describe('users.insert', () => {
 		let users = await Users.find();
 		expect(users).toHaveLength(0);
 
-    addTestUsers();
+		addTestUsers();
 		users = await Users.find();
 		expect(users).toHaveLength(3);
 	});
@@ -29,7 +29,7 @@ describe('users.insert', () => {
 		let users = await Users.find();
 		expect(users).toHaveLength(0);
 
-    addTestUsers();
+		addTestUsers();
 		users = await Users.find();
 
 		expect(users[0].username).toBe('whiskeyjack');
