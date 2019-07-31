@@ -5,14 +5,22 @@ beforeEach(async () => {
 	await db('users').truncate();
 });
 
+function addUser(name, pass) {
+	return Users.insert({ username: name, password: pass });
+}
+
+function addTestUsers () {
+  await addUser('whiskeyjack', '12345');
+  await addUser('crokus', '12345');
+  await addUser('swedgen', '12345');
+}
+
 describe('users.insert', () => {
 	it('is able to add user to the db!', async () => {
 		let users = await Users.find();
 		expect(users).toHaveLength(0);
 
-		await Users.insert({ username: 'whiskeyjack', password: 12345 });
-		await Users.insert({ username: 'crokus', password: 12345 });
-		await Users.insert({ username: 'swedgen', password: 12345 });
+    addTestUsers();
 		users = await Users.find();
 		expect(users).toHaveLength(3);
 	});
@@ -21,9 +29,7 @@ describe('users.insert', () => {
 		let users = await Users.find();
 		expect(users).toHaveLength(0);
 
-		await Users.insert({ username: 'whiskeyjack', password: 12345 });
-		await Users.insert({ username: 'crokus', password: 12345 });
-		await Users.insert({ username: 'swedgen', password: 12345 });
+    addTestUsers();
 		users = await Users.find();
 
 		expect(users[0].username).toBe('whiskeyjack');
@@ -32,10 +38,7 @@ describe('users.insert', () => {
 	});
 
 	it('returns the newly inserted user', async () => {
-		const newUser = await Users.insert({
-			username: 'whiskeyjack',
-			password: 12345,
-		});
+		const newUser = await addUser('whiskeyjack', '12345');
 		expect(newUser.username).toBe('whiskeyjack');
 	});
 });
