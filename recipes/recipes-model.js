@@ -12,7 +12,7 @@ module.exports = {
 };
 
 function find() {
-	return db('recipes').select('id', 'username', 'password');
+	return db('recipes').select('id', 'user_id', 'title', 'category', 'source');
 }
 
 function findBy(filter) {

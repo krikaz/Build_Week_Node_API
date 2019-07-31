@@ -1,7 +1,15 @@
 const db = require('../data/dbConfig');
 const Recipes = require('./recipes-model');
+const Users = require('../users/users-model');
 
 beforeEach(async () => {
+	await db('recipes').truncate();
+	await db('users').truncate();
+	await Users.add({ username: 'jack', password: '1234' });
+});
+
+afterEach(async () => {
+	await db('users').truncate();
 	await db('recipes').truncate();
 });
 
@@ -10,9 +18,9 @@ function addRecipe(id, title, cat, src) {
 }
 
 function addTestRecipes() {
-	addRecipe('1', 'Secret dish', 'dishes', 'source of all good things');
-	addRecipe('1', 'Secret dessert', 'dessert', 'source of all good things');
-	addRecipe('1', 'Yummy mashed potatoes', 'meal', 'source of all good things');
+	addRecipe(1, 'Secret dish', 'dishes', 'source of all good things');
+	addRecipe(1, 'Secret dessert', 'dessert', 'source of all good things');
+	addRecipe(1, 'Yummy mashed potatoes', 'meal', 'source of all good things');
 }
 
 describe('recipes.insert', () => {
@@ -39,7 +47,7 @@ describe('recipes.insert', () => {
 
 	it('returns the newly inserted recipe', async () => {
 		const newRecipe = await addRecipe(
-			'1',
+			1,
 			'Secret dish',
 			'dishes',
 			'source of all good things'

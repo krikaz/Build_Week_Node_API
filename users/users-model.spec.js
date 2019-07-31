@@ -3,6 +3,12 @@ const Users = require('./users-model');
 
 beforeEach(async () => {
 	await db('users').truncate();
+	await db('recipes').truncate();
+});
+
+afterEach(async () => {
+	await db('users').truncate();
+	await db('recipes').truncate();
 });
 
 function addUser(name, pass) {
