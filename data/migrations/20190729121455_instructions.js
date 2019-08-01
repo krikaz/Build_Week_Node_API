@@ -5,7 +5,7 @@ exports.up = function(knex) {
 			.integer('recipe_id')
 			.references('id')
 			.inTable('recipes');
-		table.integer('order');
+		table.integer('order').notNullable();
 		table
 			.integer('quantity_id')
 			.references('id')
