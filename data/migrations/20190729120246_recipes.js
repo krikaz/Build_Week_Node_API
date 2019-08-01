@@ -6,13 +6,13 @@ exports.up = function(knex) {
 				.integer('user_id')
 				.references('id')
 				.inTable('users');
-			table.text('title', 128).notNullable();
-			table.text('category', 128).notNullable();
-			table.text('source', 128);
+			table.string('title', 128).notNullable();
+			table.string('category', 128).notNullable();
+			table.string('source', 128);
 		})
 		.createTable('ingredients', table => {
 			table.increments();
-			table.text('name', 128).notNullable();
+			table.string('name', 128).notNullable();
 		})
 		.createTable('quantities', table => {
 			table.increments();
@@ -20,7 +20,7 @@ exports.up = function(knex) {
 		})
 		.createTable('units', table => {
 			table.increments();
-			table.text('unit', 128).notNullable();
+			table.string('unit', 128).notNullable();
 		});
 };
 
