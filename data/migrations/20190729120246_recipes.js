@@ -6,21 +6,21 @@ exports.up = function(knex) {
 				.integer('user_id')
 				.references('id')
 				.inTable('users');
-			table.string('title', 128).notNullable();
+			table.string('title', 128).notNullable().unique();
 			table.string('category', 128).notNullable();
 			table.string('source', 128);
 		})
 		.createTable('ingredients', table => {
 			table.increments();
-			table.string('name', 128).notNullable();
+			table.string('name', 128).notNullable().unique();
 		})
 		.createTable('quantities', table => {
 			table.increments();
-			table.float('amount').notNullable();
+			table.float('amount').notNullable().unique();
 		})
 		.createTable('units', table => {
 			table.increments();
-			table.string('unit', 128).notNullable();
+			table.string('unit', 128).notNullable().unique();
 		});
 };
 
